@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -rf ../docs/zinc/
+cp -r html/target/zinc-html-1.0-SNAPSHOT/zinc/ ../docs/zinc/
+cp ../zinc.html ../docs/index.html

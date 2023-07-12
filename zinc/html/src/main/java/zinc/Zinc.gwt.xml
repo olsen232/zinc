@@ -1,0 +1,11 @@
+<module rename-to='zinc'>
+  <inherits name='playn.Scene'/>
+  <inherits name='ZincAssets'/>
+
+  <source path='core'/>
+  <source path='html'/>
+
+  <public path="resources" />
+
+  <entry-point class='zinc.html.ZincHtml'/>
+</module>
