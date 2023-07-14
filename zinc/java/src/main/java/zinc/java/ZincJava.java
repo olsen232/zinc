@@ -13,8 +13,9 @@ import pythagoras.f.IDimension;
 import static zinc.core.PixelConstants.*;
 
 import zinc.core.Clipboard;
-import zinc.core.Zinc;
+import zinc.core.ControllerHub;
 import zinc.core.Platform;
+import zinc.core.Zinc;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
@@ -22,9 +23,13 @@ import java.awt.datatransfer.StringSelection;
 
 import java.lang.reflect.Field;
 
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
+
 public class ZincJava {
 
   public static void main (String[] args) {
+    new JavaControllerHub();
     new JavaClipboard();
 
     LWJGLPlatform.Config config = new LWJGLPlatform.Config();
@@ -117,6 +122,14 @@ public class ZincJava {
         return null;  // Toolkit calls breaks everything on my Macbook.
       }
       return Toolkit.getDefaultToolkit().getSystemClipboard();
+    }
+  }
+
+  static class JavaControllerHub extends ControllerHub {
+    @Override
+    public int getControllerCount() {
+      Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
+      return controllers.length;
     }
   }
   
