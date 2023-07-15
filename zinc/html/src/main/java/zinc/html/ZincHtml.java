@@ -10,6 +10,7 @@ import playn.core.Canvas;
 import playn.core.Scale;
 
 import zinc.core.Clipboard;
+import zinc.core.ControllerHub;
 import zinc.core.Zinc;
 import zinc.core.Platform;
 
@@ -18,6 +19,7 @@ import static zinc.core.PixelConstants.*;
 public class ZincHtml implements EntryPoint {
 
   @Override public void onModuleLoad () {
+    new HtmlControllerHub();
     new HtmlClipboard();
 
     playn.html.HtmlPlatform.Config config = new playn.html.HtmlPlatform.Config();
@@ -47,6 +49,18 @@ public class ZincHtml implements EntryPoint {
       elem.setHeight(pixelHeight);
       return new HtmlCanvas(raw.graphics(), new HtmlImage(raw.graphics(), Scale.ONE, elem, "<canvas>"));
     }
+  }
+
+  static class HtmlControllerHub extends ControllerHub {
+    @Override
+    public native int getControllerCount() /*-{
+      var result = 0;
+      var gamepads = navigator.getGamepads();
+      for (var i = 0; i < gamepads.length; i++) {
+        if (gamepads[i] != null) result += 1;
+      }
+      return result;
+    }-*/;
   }
 
   static class HtmlClipboard extends Clipboard {
