@@ -8,4 +8,10 @@ public abstract class ControllerHub {
   }
 
   public abstract int getControllerCount();
+
+  // get controller horizontal position (between -1.0 and 1.0)
+  public abstract double X();
+
+  // get controller vertical position (between -1.0 and 1.0)
+  public abstract double Y();
 }

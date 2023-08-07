@@ -80,6 +80,9 @@ public class Zinc extends SceneGame {
         surface.draw(MenuGfx.TITLE, 0, 0);
         if (ControllerHub.INSTANCE != null) {
           Font.WHITE.singleLine(surface, "Controllers found: " + ControllerHub.INSTANCE.getControllerCount(), 8 * 3, 8 * 20);
+          Font.WHITE.singleLine(surface, "Controller X: " + ControllerHub.INSTANCE.X(), 8 * 3, 8 * 21);
+          Font.WHITE.singleLine(surface, "Controller Y: " + ControllerHub.INSTANCE.Y(), 8 * 3, 8 * 22);
+
         }
       } else if (fontLoaded) {
         surface.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0xff000000);

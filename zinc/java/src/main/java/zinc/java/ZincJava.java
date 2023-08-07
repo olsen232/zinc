@@ -25,6 +25,7 @@ import java.lang.reflect.Field;
 
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
+import net.java.games.input.Component;
 
 public class ZincJava {
 
@@ -130,6 +131,20 @@ public class ZincJava {
     public int getControllerCount() {
       Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
       return controllers.length;
+    }
+
+    @Override
+    public double X() {
+      Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
+      controllers[0].poll();
+      return controllers[0].getComponent(Component.Identifier.Axis.X).getPollData();
+    }
+
+    @Override
+    public double Y() {
+      Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
+      controllers[0].poll();
+      return controllers[0].getComponent(Component.Identifier.Axis.Y).getPollData();
     }
   }
   
