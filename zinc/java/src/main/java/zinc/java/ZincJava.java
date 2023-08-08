@@ -136,15 +136,21 @@ public class ZincJava {
     @Override
     public double X() {
       Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
-      controllers[0].poll();
-      return controllers[0].getComponent(Component.Identifier.Axis.X).getPollData();
+      for (Controller controller : controllers) {
+        controller.poll();
+        return controller.getComponent(Component.Identifier.Axis.X).getPollData();
+      }
+      return 0.0;
     }
 
     @Override
     public double Y() {
       Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
-      controllers[0].poll();
-      return controllers[0].getComponent(Component.Identifier.Axis.Y).getPollData();
+      for (Controller controller : controllers) {
+        controller.poll();
+        return controller.getComponent(Component.Identifier.Axis.Y).getPollData();
+      }
+      return 0.0;
     }
   }
   
