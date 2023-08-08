@@ -61,6 +61,24 @@ public class ZincHtml implements EntryPoint {
       }
       return result;
     }-*/;
+
+    @Override
+    public native double X() /*-{
+      var gamepads = navigator.getGamepads();
+      for (var i = 0; i < gamepads.length; i++) {
+        if (gamepads[i] != null) return gamepads[i].axes[0];
+      }
+      return 0.0;
+    }-*/;
+
+    @Override
+    public native double Y() /*-{
+      var gamepads = navigator.getGamepads();
+      for (var i = 0; i < gamepads.length; i++) {
+        if (gamepads[i] != null) return gamepads[i].axes[1];
+      }
+      return 0.0;
+    }-*/;
   }
 
   static class HtmlClipboard extends Clipboard {
