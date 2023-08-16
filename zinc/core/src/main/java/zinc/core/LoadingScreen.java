@@ -9,21 +9,26 @@ public class LoadingScreen {
     MenuGfx.startLoading();
     Font.startLoading();
     Tiles.startLoading();
+    Maps.startLoading();
     Sprites.startLoading();
     Sounds.startLoading();
   }
 
   public void update() {
+    if (isFinished) return;
+
     if (!fontLoaded && Font.RAW.isLoaded()) {
       Font.finishLoading();
       fontLoaded = true;
+    }
 
-    } else if (Image.LOAD_TRACKER.isLoaded() &&
-               /*Sound.LOAD_TRACKER.isLoaded() &&*/
-               (Sounds.music ? Sound.MUSIC_LOAD_TRACKER.isLoaded() : true)) {
+    if (Image.LOAD_TRACKER.isLoaded() &&
+         /*Sound.LOAD_TRACKER.isLoaded() &&*/
+         (Sounds.music ? Sound.MUSIC_LOAD_TRACKER.isLoaded() : true)) {
 
       MenuGfx.finishLoading();
       Tiles.finishLoading();
+      Maps.finishLoading();
       Sprites.finishLoading();
       Sounds.finishLoading();
       isFinished = true;
