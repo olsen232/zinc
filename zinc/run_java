@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f java/target/natives ]
+if [ ! -d java/target/natives ]
 then
     mvn package
 fi

@@ -19,6 +19,12 @@ public class TiledMap {
     builder.layers.toArray(this.layers);
   }
 
+  public void draw(Surface surface) {
+    for (Layer layer : layers) {
+      layer.draw(surface);
+    }
+  }
+
   public String toString() {
     return "TiledMap[" + width + "x" + height + "]";
   }

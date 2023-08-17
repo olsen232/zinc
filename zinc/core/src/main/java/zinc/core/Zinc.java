@@ -74,6 +74,8 @@ public class Zinc extends SceneGame {
 
     surface.draw(MenuGfx.TITLE, 0, 0);
 
+    Maps.ISLAND_MAP.draw(surface);
+
     if (ControllerHub.INSTANCE != null) {
       int numControllers = ControllerHub.INSTANCE.getControllerCount();
       Font.WHITE.singleLine(surface, "Controllers found: " + numControllers, 8 * 3, 8 * 20);

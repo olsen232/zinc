@@ -1,5 +1,7 @@
 package zinc.core;
 
+import static zinc.core.PixelConstants.*;
+
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -15,6 +17,19 @@ public class Layer {
     this.width = builder.width;
     this.height = builder.height;
     this.data = builder.data;
+  }
+
+  public void draw(Surface surface) {
+    Image[] tiles = Tiles.get("beach_tileset.png");
+    int i = 0;
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        int d = data[i++];
+        d = d & 0x00ffffff;
+        d -= 1;
+        if (d > 0) surface.draw(tiles[d], (x - 20) * TILE_SIZE, (y - 20) * TILE_SIZE);
+      }
+    }
   }
 
   public String toString() {
