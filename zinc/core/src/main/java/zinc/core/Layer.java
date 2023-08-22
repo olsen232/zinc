@@ -19,7 +19,7 @@ public class Layer {
     this.data = builder.data;
   }
 
-  public void draw(Surface surface) {
+  public void draw(Surface surface, int viewX, int viewY) {
     Image[] tiles = Tiles.get("beach_tileset.png");
     int i = 0;
     for (int y = 0; y < height; y++) {
@@ -27,7 +27,7 @@ public class Layer {
         int d = data[i++];
         d = d & 0x00ffffff;
         d -= 1;
-        if (d > 0) surface.draw(tiles[d], (x - 20) * TILE_SIZE, (y - 20) * TILE_SIZE);
+        if (d >= 0) surface.draw(tiles[d], x * TILE_SIZE - viewX, y * TILE_SIZE - viewY);
       }
     }
   }

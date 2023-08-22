@@ -331,7 +331,7 @@ function zinc(){
     }
     var strongName;
     try {
-      strongName = '4C06B498AC2AC5F4DEE312AB07948E58';
+      strongName = 'BA821EF739E6CD4B9AEC19C09383A742';
       var idx = strongName.indexOf(':');
       if (idx != -1) {
         softPermutationId = parseInt(strongName.substring(idx + 1), 10);

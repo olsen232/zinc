@@ -16,12 +16,9 @@ public class Zinc extends SceneGame {
   private Surface surface;
   private int updatedAtMs;
 
-  private LoadingScreen loadingScreen;
+  private double viewX, viewY = 0;
 
-  private boolean fontLoaded = false;
-  private boolean loadingFinished = false;
-  private boolean clicked = false;
-  private boolean musicFired = false;
+  private LoadingScreen loadingScreen;
 
   public Zinc(Platform platform) {
     super(platform.raw, FRAME_MS);
@@ -46,6 +43,16 @@ public class Zinc extends SceneGame {
       return;
     }
     // Main game loop.
+
+    double viewSpeed = 4;
+
+    if (ControllerHub.INSTANCE != null) {
+      int numControllers = ControllerHub.INSTANCE.getControllerCount();
+      if (numControllers > 0) {
+        viewX += viewSpeed * ControllerHub.INSTANCE.X();
+        viewY += viewSpeed * ControllerHub.INSTANCE.Y();
+      }
+    }
   }
 
   @Override
@@ -74,7 +81,7 @@ public class Zinc extends SceneGame {
 
     surface.draw(MenuGfx.TITLE, 0, 0);
 
-    Maps.ISLAND_MAP.draw(surface);
+    Maps.ISLAND_MAP.draw(surface, (int) viewX, (int) viewY);
 
     if (ControllerHub.INSTANCE != null) {
       int numControllers = ControllerHub.INSTANCE.getControllerCount();
@@ -88,8 +95,8 @@ public class Zinc extends SceneGame {
   
   private Slot<Keyboard.Event> keySlot = new Slot<Keyboard.Event>() {
     public void onEmit(Keyboard.Event e) {
-  	  if (e instanceof Keyboard.KeyEvent) {
-  	    Keyboard.KeyEvent ke = (Keyboard.KeyEvent) e;
+      if (e instanceof Keyboard.KeyEvent) {
+        Keyboard.KeyEvent ke = (Keyboard.KeyEvent) e;
         // controlState.onKeyChange(ke.key, ke.down);
       }
     }
@@ -102,7 +109,7 @@ public class Zinc extends SceneGame {
         loadingScreen = null;
       }
 
-	    /*if (e instanceof Mouse.ButtonEvent) {
+      /*if (e instanceof Mouse.ButtonEvent) {
         controlState.onMouseChange((int) e.x, (int) e.y, ((Mouse.ButtonEvent) e).down);
       } else if (controlState.isMousePressed()) {
          controlState.onMouseDragged((int) e.x, (int) e.y);
