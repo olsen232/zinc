@@ -23,14 +23,20 @@ public class MapReader extends SimpleXmlParser {
     BUILDERS.put("image", new TileSet.Image.Builder());
     BUILDERS.put("layer", new Layer.Builder());
     BUILDERS.put("data", new Layer.Data.Builder());
+    BUILDERS.put("tile", new TileSet.Tile.Builder());
+    BUILDERS.put("animation", new TileSet.Tile.Animation.Builder());
+    BUILDERS.put("frame", new TileSet.Tile.Animation.Frame.Builder());
   }
 
   public MapReader() {
     super(BUILDERS);
   }
 
-  @Override
-  public TiledMap parse(String input, String context) {
+  public TiledMap parseMap(String input, String context) {
     return (TiledMap) super.parse(input, context);
+  }
+
+  public TileSet parseTileSet(String input, String context) {
+    return (TileSet) super.parse(input, context);
   }
 }

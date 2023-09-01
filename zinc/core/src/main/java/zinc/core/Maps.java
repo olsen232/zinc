@@ -20,6 +20,6 @@ public class Maps {
   }
 
   public static void finishLoading() {
-    ISLAND_MAP = MAP_READER.parse(ISLAND_TMX_FUTURE.result().get(), "island.tmx");
+    ISLAND_MAP = MAP_READER.parseMap(ISLAND_TMX_FUTURE.result().get(), "island.tmx");
   }
 }
