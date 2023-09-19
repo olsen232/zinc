@@ -66,14 +66,14 @@ public class Zinc extends SceneGame {
     surface.scale(Platform.INSTANCE.zoom, Platform.INSTANCE.zoom);
 
     try {
-      draw(surface);
+      draw(surface, Platform.INSTANCE.raw.tick());
     } finally {
       surface.end();
       surface.restoreTx();
     }
   }
 
-  public void draw(Surface surface) {
+  public void draw(Surface surface, int tick) {
     if (loadingScreen != null) {
       loadingScreen.draw(surface);
       return;
@@ -81,7 +81,7 @@ public class Zinc extends SceneGame {
 
     surface.draw(MenuGfx.TITLE, 0, 0);
 
-    Maps.ISLAND_MAP.draw(surface, (int) viewX, (int) viewY);
+    Maps.ISLAND_MAP.draw(surface, (int) viewX, (int) viewY, tick);
 
     if (ControllerHub.INSTANCE != null) {
       int numControllers = ControllerHub.INSTANCE.getControllerCount();

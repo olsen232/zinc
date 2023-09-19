@@ -19,9 +19,9 @@ public class TiledMap {
     builder.layers.toArray(this.layers);
   }
 
-  public void draw(Surface surface, int viewX, int viewY) {
+  public void draw(Surface surface, int viewX, int viewY, int tick) {
     for (Layer layer : layers) {
-      layer.draw(surface, viewX, viewY);
+      layer.draw(surface, viewX, viewY, tick);
     }
   }
 

@@ -35,12 +35,6 @@ public final class Tiles {
     }
     BEACH_TILESET = MAP_READER.parseTileSet(BEACH_TILESET_TSX_FUTURE.result().get(), "beach_tileset.tsx");
     System.out.println(BEACH_TILESET);
-    for(TileSet.Tile tile : BEACH_TILESET.tiles) {
-      System.out.println("  " + tile);
-      for (TileSet.Tile.Animation.Frame frame : tile.frames) {
-        System.out.println("    " + frame);
-      }
-    }
   }
 
   public static Image[] get(String file) {

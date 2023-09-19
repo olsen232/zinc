@@ -19,15 +19,31 @@ public class Layer {
     this.data = builder.data;
   }
 
-  public void draw(Surface surface, int viewX, int viewY) {
+  public void draw(Surface surface, int viewX, int viewY, int tick) {
     Image[] tiles = Tiles.get("beach_tileset.png");
+    TileSet tileSet = Tiles.BEACH_TILESET;
     int i = 0;
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         int d = data[i++];
         d = d & 0x00ffffff;
         d -= 1;
-        if (d >= 0) surface.draw(tiles[d], x * TILE_SIZE - viewX, y * TILE_SIZE - viewY);
+        TileSet.Tile tile = tileSet.tiles.get(d);
+        if (tile != null) {
+          int period = 0;
+          for (TileSet.Tile.Animation.Frame frame : tile.frames) {
+            period += frame.duration;
+          }
+          int remainder = tick % period;
+          for (TileSet.Tile.Animation.Frame frame : tile.frames) {
+            remainder -= frame.duration;
+            if (remainder < 0) {
+              surface.draw(tiles[frame.tileId], x * TILE_SIZE - viewX, y*TILE_SIZE - viewY);
+              break;
+            }
+          }
+        }
+        else if (d >= 0) surface.draw(tiles[d], x * TILE_SIZE - viewX, y * TILE_SIZE - viewY);
       }
     }
   }

@@ -1,6 +1,7 @@
 package zinc.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TileSet {
   public final String source;
@@ -8,7 +9,7 @@ public class TileSet {
   public final int tileCount;
   public final int columns;
   public final String imageSource;
-  public final Tile[] tiles;
+  public final HashMap<Integer, Tile> tiles;
 
   public TileSet(TileSet.Builder builder) {
     this.source = builder.source;
@@ -17,8 +18,10 @@ public class TileSet {
     this.columns = builder.columns;
     this.imageSource = builder.imageSource;
 
-    this.tiles = new Tile[builder.tiles.size()];
-    builder.tiles.toArray(this.tiles);
+    this.tiles = new HashMap<>();
+    for (Tile tile : builder.tiles) {
+      this.tiles.put(tile.id, tile);
+    }
   }
 
   public String toString() {
